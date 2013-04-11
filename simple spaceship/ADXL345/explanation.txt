@@ -1,0 +1,11 @@
+device
+address
+num = no.of registers being accessed
+
+writeTo(device, register, data)
+0x2D - register : DATA SHEET
+
+readFrom - to read 6 bytes of data from accelerometer
+
+we have 2 bytes of data - the 8 higher significant bits are left shifted and added to
+ lower significant bits to get a 16 bit value
