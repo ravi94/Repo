@@ -40,9 +40,13 @@ clock=pygame.time.Clock()
 font = pygame.font.Font(None, 36)
 font1 = pygame.font.Font(None, 80)
 
+
 text3 = font1.render("Game Over", 1, (255, 0, 0))
 text4 = font1.render("Press any key to Quit...", 1, (255, 0, 0))
 
+text6 = font1.render("PAUSED", 1, (255, 0, 0))
+
+pause=False
 
 
 def dist((e,f),(g,h)):
@@ -52,13 +56,12 @@ def dist((e,f),(g,h)):
         
 
 while done :
-        
-        text1 = font.render("Score : "+str(score), 1, (255, 0, 0))
-        text2 = font.render("Level : "+str(level), 1, (255, 0, 0))
-        text5 = font.render("Unshot Asteroid : "+str(left), 1, (255, 0, 0))
+	text1 = font.render("Score : "+str(score), 1, (255, 0, 0))
+	text2 = font.render("Level : "+str(level), 1, (255, 0, 0))
+	text5 = font.render("Unshot Asteroid : "+str(left), 1, (255, 0, 0))              
 
 # defining Clock        
-        ms=clock.tick()
+        ms=clock.tick(30)
         sec=ms/1000.0
         
         
@@ -87,6 +90,7 @@ while done :
                                  speed[0]=-t
                         if event.key==K_SPACE:
                                 flag=1
+			
                 if event.type==KEYUP:
                         if event.key==K_UP:
                                 speed[1]=0
@@ -97,7 +101,23 @@ while done :
                                 speed[0]=0
                         if event.key==K_LEFT:
                                 speed[0]=0
-       
+			if event.key==K_p:
+                                pause=True
+	#print pause, pos_ship
+	"""if pause==True:
+            pygame.time.delay(3000)
+        if pause==False:
+            #pygame.time.delay(0)
+            continue
+
+	while (pause==True):
+		print pause
+		screen.blit(text5, [400,300])
+		for event in pygame.event.get():
+			if event.type==KEYUP:	
+				if event.key==K_p:
+	                                pause=False  """
+						       
 # Ship Control
         if sh_e==0:
                 if pos_ship[0]>0 and pos_ship[0]+81<800:
@@ -153,7 +173,7 @@ while done :
                         r=astr_c
                         score+=1
                         ae=1
-                        ta=8
+                        ta=0
                         a=801 ;[p,q]=[800,random.randint(90,510)]
                         
                 if (a>800):        
@@ -165,7 +185,7 @@ while done :
 # do explosion
 
         if ae==1 :
-                if ta<72:
+                if ta<9:
                         ei=[ta%9, (ta//9)%9]
                         screen.blit(explosion,(r[0]-45,r[1]-45),[(50+ei[0]*100)-45,(50+ei[0]*100)-45,100,100])
                         pygame.display.update()
@@ -176,11 +196,12 @@ while done :
 
         if dist(ship_c,astr_c)<70:
                 sh_e=1
-                ts=8
+		ae=1 ; r=astr_c
+		ta=0 ; ts=0          
                 p=900
     
         if sh_e==1 :
-                if ts<72:
+                if ts<9:
                         ei=[ts%9, (ts//9)%9]
                         screen.blit(explosion,(pos_ship[0],pos_ship[1]),[(50+ei[0]*100)-45,(50+ei[0]*100)-45,100,100])
                         screen.blit(explosion,(astr_c[0]-45,astr_c[1]-45),[(50+ei[0]*100)-45,(50+ei[0]*100)-45,100,100])

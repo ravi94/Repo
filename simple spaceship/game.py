@@ -10,10 +10,10 @@ e="explosion.png"
 
 import pygame,time,random,math
 from pygame.locals import *
-"""
+
 import serial
 ser = serial.Serial('/dev/ttyUSB0',9600)
-ser.flushInput()"""
+ser.flushInput()
 # variable declaration
 Ship=ship
 shots=[]
@@ -45,6 +45,7 @@ font1 = pygame.font.Font(None, 80)
 
 text3 = font1.render("Game Over", 1, (255, 0, 0))
 text4 = font1.render("Press any key to Quit...", 1, (255, 0, 0))
+Pause=False
 
 
 
@@ -118,7 +119,7 @@ while done :
                                 speed[1]=-t
                         #if (mat<255 and mat>160) :
                         if event.key==K_DOWN:   
-                                speed[1]=+
+                                speed[1]=+t
                                 
                         if event.key==K_RIGHT:
                                 speed[0]=+t
@@ -128,6 +129,9 @@ while done :
                                  
                         if event.key==K_SPACE:
                                 flag=1
+			if event.key==K_ESCAPE:
+                                Pause=True				
+				
                 if event.type==KEYUP:
                         if event.key==K_UP:
                                 speed[1]=0
@@ -138,6 +142,10 @@ while done :
                                 speed[0]=0
                         if event.key==K_LEFT:
                                 speed[0]=0
+
+	while (Pause==True):
+		if event.key==K_ESCAPE:
+                                Pause=False	
 
 # Ship Control
         if sh_e==0:
@@ -247,5 +255,12 @@ while done2:
                                 done2=False
 ser.flushInput()
 pygame.quit()
-                                                                
+                 
+"""
+1. ===> Grnd
+2. ===> 3.3
+3. ===> 5V
+4. ===> A4
+5. ===> A5
+"""                                               
                                 

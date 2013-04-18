@@ -4,13 +4,13 @@
  #define TO_READ (6)        
  
  byte buff[TO_READ] ;  
- char str[512];                     
+ char str1[512], str2[512];                     
  
  void setup()
  {
    Wire.begin();        
    Serial.begin(9600);  
-  pinMode(11,OUTPUT);
+   
   
    writeTo(DEVICE, 0x2D, 0);      
    writeTo(DEVICE, 0x2D, 16);
@@ -29,21 +29,22 @@ void loop()
    z = (((int)buff[5]) << 8) | buff[4];
    
 
-   //sprintf(str, "%d %d %d", x, y, z);  
-   //Serial.println(str);
-   Serial.println(x);
-   //Serial.print(',');
-   Serial.println(y);
-   //Serial.print(',');
-   //Serial.println(z);
+ //sprintf(str, "%d %d %d", x, y, z);  
+ //  Serial.println(str);
+ //  delay(15);
+   //Serial.println(x);
    
-   
-   delay(25);
-  // x = map(x, -250, 290, 0, 255);
-  // Serial.println(x);
-   //analogWrite(11,x);
+   x=map(x, -250, 290, 0, 255); //var in range2 = map(var in range1, low_lim1, high_lim1, low_lim2, high_lim2);
+   y=map(y, -250, 290, 0, 255);
+   sprintf(str1, "$%d", y);
+   sprintf(str2,"#%d", x); 
+   //Serial.println(str); 
+   Serial.println(str1);
+   Serial.println(str2);
+   delay(10);
+  // analogWrite(11,x);
  }
-
+ 
 void writeTo(int device, byte address, byte val) {
     Wire.beginTransmission(device); 
     Wire.write(address);       
