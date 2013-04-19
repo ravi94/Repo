@@ -63,7 +63,9 @@ while done0 :
         
         for event in pygame.event.get():
                         if event.type==QUIT:
-                                done2=False
+                                done0=False
+				done=False
+				done2=False	
                                 
                         if event.type==KEYDOWN:
                                 done0=False

@@ -65,13 +65,15 @@ def cut(s):
 
         
 while done0 : 
-	screen.blit(background,(0,0))   
+	screen.blit(background0,(0,0))   
 	screen.blit(text6,[100,201])
         pygame.display.update()
         
         for event in pygame.event.get():
                         if event.type==QUIT:
-                                done2=False
+                                done0=False
+				done=False
+				done2=False	
                                 
                         if event.type==KEYDOWN:
                                 done0=False
