@@ -6,6 +6,7 @@ db="debris.png"
 sh="shot1.png"
 ast="asteroid.png"
 e="explosion.png"
+start = "start.jpg"
 
 
 import pygame,time,random,math
@@ -29,6 +30,7 @@ astr_s=201
 t=200
 pygame.init()
 screen=pygame.display.set_mode((800,600),0,32)
+background0=pygame.image.load(start).convert()
 background=pygame.image.load(bg).convert()
 background2=pygame.transform.flip(background,1,0)
 shot=pygame.image.load(sh).convert_alpha()    
@@ -55,8 +57,8 @@ def dist((e,f),(g,h)):
 
         
 while done0 : 
-	screen.blit(background,(0,0))   
-	screen.blit(text6,[100,201])
+	screen.blit(background0,(0,0))   
+	screen.blit(text6,[100,500])
         pygame.display.update()
         
         for event in pygame.event.get():
